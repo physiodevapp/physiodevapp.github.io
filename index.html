@@ -88,11 +88,10 @@ body{
 
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
 
-a:focus-visible,button:focus-visible,input:focus-visible{
+a:focus-visible,button:focus-visible{
   outline:2px solid var(--accent);
   outline-offset:3px;
 }
-input[type=range]{accent-color:var(--accent);}
 
 /* ---------- barra superior ---------- */
 
@@ -142,7 +141,7 @@ input[type=range]{accent-color:var(--accent);}
 .head{padding:44px 0 30px;border-bottom:1px solid var(--rule);}
 .head-grid{
   display:grid;
-  grid-template-columns:minmax(0,1fr) minmax(0,380px);
+  grid-template-columns:minmax(0,1fr) minmax(0,340px);
   gap:44px;
   align-items:start;
 }
@@ -175,46 +174,7 @@ input[type=range]{accent-color:var(--accent);}
 }
 .fields dt{color:var(--muted);letter-spacing:0.03em;}
 .fields dd{margin:0;color:var(--ink);}
-
-/* ---------- goniómetro ---------- */
-
-.gonio{
-  margin:0;
-  padding:16px;
-  background:var(--panel);
-  border:1px solid var(--rule);
-  border-radius:3px;
-}
-.gonio svg{display:block;width:100%;height:auto;}
-.g-base{stroke:var(--rule);stroke-width:1.5;}
-.g-guide{stroke:var(--rule);stroke-width:1.5;stroke-dasharray:3 5;}
-.g-arc{stroke:var(--accent);stroke-width:5;stroke-linecap:round;}
-.g-needle{stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;}
-.g-pivot{fill:var(--ink);}
-.g-tick{
-  font-family:"Azeret Mono",ui-monospace,monospace;
-  font-size:11px;
-  fill:var(--muted);
-}
-.gonio-readout{display:flex;align-items:baseline;gap:12px;margin:4px 0 14px;}
-.gonio-readout output{
-  font-family:"Azeret Mono",ui-monospace,monospace;
-  font-size:2.1rem;
-  font-weight:600;
-  color:var(--accent);
-  font-variant-numeric:tabular-nums;
-  letter-spacing:-0.03em;
-}
-.gonio-readout span,
-.gonio-control span{
-  font-family:"Azeret Mono",ui-monospace,monospace;
-  font-size:10.5px;
-  color:var(--muted);
-  letter-spacing:0.05em;
-  text-transform:uppercase;
-}
-.gonio-control{display:flex;align-items:center;gap:12px;}
-.gonio-control input{flex:1;min-width:0;}
+.head-grid > .fields{margin-top:8px;max-width:none;}
 
 /* ---------- secciones ---------- */
 
@@ -451,33 +411,14 @@ footer p{
     <p class="lede">Fisioterapeuta en activo y desarrollador web.</p>
     <p class="lede">Construyo software clínico y lo pruebo con mis pacientes.</p>
     <p class="intro">Casi diez años de consulta en fisioterapia musculoesquelética y tres de docencia universitaria. Desde 2024 desarrollo las herramientas que echaba en falta trabajando.</p>
-    <dl class="fields">
-      <div><dt>Ejercicio</dt><dd>Fisioterapia musculoesquelética</dd></div>
-      <div><dt>Desarrollo</dt><dd>Software clínico, desde 2024</dd></div>
-      <div><dt>Base</dt><dd>Madrid</dd></div>
-      <div><dt>Encargos</dt><dd>Abierto a freelance</dd></div>
-    </dl>
   </div>
 
-  <figure class="gonio" id="gonio">
-    <svg viewBox="0 0 340 240" role="img" aria-label="Flexión de rodilla, 92 grados">
-      <line class="g-base" x1="170" y1="195" x2="320" y2="195"/>
-      <path class="g-guide" d="M 300 195 A 130 130 0 0 0 63.5 120.4" fill="none"/>
-      <path class="g-arc" id="arco" d="" fill="none"/>
-      <line class="g-needle" id="aguja" x1="170" y1="195" x2="320" y2="195"/>
-      <circle class="g-pivot" cx="170" cy="195" r="5"/>
-      <text class="g-tick" x="306" y="214">0°</text>
-      <text class="g-tick" x="40" y="112">145°</text>
-    </svg>
-    <div class="gonio-readout">
-      <output id="lectura" for="rango">92°</output>
-      <span>Flexión de rodilla · sensor inercial</span>
-    </div>
-    <label class="gonio-control">
-      <span>Rango</span>
-      <input type="range" id="rango" min="0" max="145" value="92" step="1" aria-label="Grados de flexión de rodilla">
-    </label>
-  </figure>
+  <dl class="fields">
+    <div><dt>Ejercicio</dt><dd>Fisioterapia musculoesquelética</dd></div>
+    <div><dt>Desarrollo</dt><dd>Software clínico, desde 2024</dd></div>
+    <div><dt>Base</dt><dd>Madrid</dd></div>
+    <div><dt>Encargos</dt><dd>Abierto a freelance</dd></div>
+  </dl>
 </div></div>
 
 <main>
@@ -653,31 +594,6 @@ footer p{
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', sincronizar);
   sincronizar();
 
-  /* Goniómetro: el arco y la aguja siguen al control de rango. */
-  var PIVOTE = { x: 170, y: 195 }, RADIO = 130, LARGO = 150;
-  var arco = document.getElementById('arco');
-  var aguja = document.getElementById('aguja');
-  var lectura = document.getElementById('lectura');
-  var rango = document.getElementById('rango');
-  var svg = document.querySelector('#gonio svg');
-
-  function punto(r, grados){
-    var rad = grados * Math.PI / 180;
-    return [PIVOTE.x + r * Math.cos(rad), PIVOTE.y - r * Math.sin(rad)];
-  }
-
-  function dibujar(grados){
-    var fin = punto(RADIO, grados), punta = punto(LARGO, grados);
-    arco.setAttribute('d', 'M ' + (PIVOTE.x + RADIO) + ' ' + PIVOTE.y +
-      ' A ' + RADIO + ' ' + RADIO + ' 0 0 0 ' + fin[0].toFixed(2) + ' ' + fin[1].toFixed(2));
-    aguja.setAttribute('x2', punta[0].toFixed(2));
-    aguja.setAttribute('y2', punta[1].toFixed(2));
-    lectura.textContent = grados + '°';
-    svg.setAttribute('aria-label', 'Flexión de rodilla, ' + grados + ' grados');
-  }
-
-  dibujar(Number(rango.value));
-  rango.addEventListener('input', function(){ dibujar(Number(rango.value)); });
 })();
 </script>
 

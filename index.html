@@ -328,19 +328,23 @@ section{padding:40px 0;border-bottom:1px solid var(--rule);}
 .avail-grid > p{margin:0 0 16px;max-width:52ch;}
 .avail{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--rule-soft);}
 .avail li{
-  padding:10px 0 10px 22px;
+  display:flex;
+  gap:13px;
+  padding:10px 0;
   border-bottom:1px solid var(--rule-soft);
-  position:relative;
   font-size:0.95rem;
 }
+/* El guion ocupa exactamente una línea de alto y lleva la rayita
+   centrada dentro, así queda alineado con la primera línea del texto
+   aunque el elemento ocupe varias. */
 .avail li::before{
   content:"";
-  position:absolute;
-  left:2px;
-  top:1.05em;
+  flex:none;
+  align-self:flex-start;
   width:9px;
-  height:1px;
-  background:var(--accent);
+  height:1.62em;
+  height:1lh;
+  background:linear-gradient(var(--accent),var(--accent)) 0 50%/9px 1px no-repeat;
 }
 
 .contact-links{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;}

@@ -176,6 +176,14 @@ a:focus-visible,button:focus-visible{
 .fields dd{margin:0;color:var(--ink);}
 .head-grid > .fields{margin-top:8px;max-width:none;}
 
+/* La última fila de cada bloque no lleva raya: el borde de la sección
+   ya cierra. Así se evita el doblete de dos rayas casi pegadas. */
+.fields div:last-child,
+.matrix div:last-child,
+.rec-specs dl div:last-child,
+.avail li:last-child{border-bottom:0;}
+.tbl tbody tr:last-child td{border-bottom:0;}
+
 /* ---------- secciones ---------- */
 
 section{padding:40px 0;border-bottom:1px solid var(--rule);}
@@ -187,11 +195,7 @@ section{padding:40px 0;border-bottom:1px solid var(--rule);}
   text-transform:uppercase;
   color:var(--accent);
   margin:0 0 24px;
-  display:flex;
-  align-items:center;
-  gap:12px;
 }
-.sec-head::after{content:"";flex:1;height:1px;background:var(--rule);}
 
 /* ---------- proyectos ---------- */
 
@@ -240,7 +244,7 @@ section{padding:40px 0;border-bottom:1px solid var(--rule);}
 .rec-prose p{margin:0 0 12px;max-width:60ch;}
 .rec-specs{padding:18px;}
 .rec-specs dl{margin:0;display:grid;gap:0;}
-.rec-specs div{padding:7px 0;border-bottom:1px solid var(--rule-soft);}
+.rec-specs dl div{padding:7px 0;border-bottom:1px solid var(--rule-soft);}
 .rec-specs dt{
   font-family:"Azeret Mono",ui-monospace,monospace;
   font-size:10px;
@@ -251,7 +255,7 @@ section{padding:40px 0;border-bottom:1px solid var(--rule);}
 }
 .rec-specs dd{margin:0;font-size:0.9rem;}
 
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin:14px 0 0;}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:16px 0 0;}
 .chips span{
   font-family:"Azeret Mono",ui-monospace,monospace;
   font-size:10px;
@@ -384,6 +388,7 @@ footer p{
 @media (max-width:600px){
   .tbl thead{position:absolute;left:-9999px;}
   .tbl tr{display:grid;gap:2px;padding:12px 0;border-bottom:1px solid var(--rule-soft);}
+  .tbl tr:last-child{border-bottom:0;}
   .tbl td{border:0;padding:0;}
   .tbl td:first-child{order:-1;}
 }

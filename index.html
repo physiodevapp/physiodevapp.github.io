@@ -165,7 +165,7 @@ a:focus-visible,button:focus-visible{
 }
 .fields div{
   display:grid;
-  grid-template-columns:132px 1fr;
+  grid-template-columns:132px minmax(0,1fr);
   gap:14px;
   padding:8px 0;
   border-bottom:1px solid var(--rule-soft);
@@ -360,6 +360,9 @@ section{padding:40px 0;border-bottom:1px solid var(--rule);}
   border-radius:2px;
   padding:9px 14px;
   text-decoration:none;
+  max-width:100%;
+  min-width:0;
+  overflow-wrap:anywhere;
 }
 .contact-links a:hover{border-color:var(--accent);color:var(--accent);}
 
@@ -381,11 +384,20 @@ footer p{
   .rec-body{grid-template-columns:1fr;}
   .rec-prose{border-right:0;border-bottom:1px solid var(--rule-soft);}
   .matrix div{grid-template-columns:1fr;gap:4px;}
-  .fields div{grid-template-columns:110px 1fr;}
+  .fields div{grid-template-columns:110px minmax(0,1fr);}
   .avail-grid{grid-template-columns:1fr;gap:26px;}
 }
 
 @media (max-width:600px){
+  /* Cada vía de contacto en su propia fila: la dirección de correo
+     dispone del ancho completo en vez de competir con los otros enlaces. */
+  .contact-links{display:grid;justify-items:start;}
+  .contact-links a{width:100%;}
+
+  /* Etiqueta encima del valor. Con dos columnas, una palabra larga como
+     "musculoesquelética" no cabe y empuja la rejilla fuera del contenedor. */
+  .fields div{grid-template-columns:1fr;gap:2px;}
+
   .tbl thead{position:absolute;left:-9999px;}
   .tbl tr{display:grid;gap:2px;padding:12px 0;border-bottom:1px solid var(--rule-soft);}
   .tbl tr:last-child{border-bottom:0;}
@@ -401,7 +413,7 @@ footer p{
 <body>
 
 <header class="topbar"><div class="wrap">
-  <span class="topbar-id"><b>Eduardo Gamboa</b> · Madrid</span>
+  <span class="topbar-id"><b>Eduardo Gamboa</b></span>
   <button type="button" class="tbtn" id="tema" aria-pressed="false" aria-label="Cambiar a tema oscuro">
     <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" focusable="false">
       <g class="icon-light" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">

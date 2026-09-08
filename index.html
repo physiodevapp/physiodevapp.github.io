@@ -180,8 +180,7 @@ a:focus-visible,button:focus-visible{
    ya cierra. Así se evita el doblete de dos rayas casi pegadas. */
 .fields div:last-child,
 .matrix div:last-child,
-.rec-specs dl div:last-child,
-.avail li:last-child{border-bottom:0;}
+.rec-specs dl div:last-child{border-bottom:0;}
 .tbl tbody tr:last-child td{border-bottom:0;}
 
 /* ---------- secciones ---------- */
@@ -323,35 +322,9 @@ section{padding:40px 0;border-bottom:1px solid var(--rule);}
 /* ---------- disponibilidad y contacto ---------- */
 
 .contact{background:var(--panel);}
-.avail-grid{
-  display:grid;
-  grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
-  gap:40px;
-  align-items:start;
-}
-.avail-grid > p{margin:0 0 16px;max-width:52ch;}
-.avail{margin:0;padding:0;list-style:none;display:grid;gap:0;border-top:1px solid var(--rule-soft);}
-.avail li{
-  display:flex;
-  gap:13px;
-  padding:10px 0;
-  border-bottom:1px solid var(--rule-soft);
-  font-size:0.95rem;
-}
-/* El guion ocupa exactamente una línea de alto y lleva la rayita
-   centrada dentro, así queda alineado con la primera línea del texto
-   aunque el elemento ocupe varias. */
-.avail li::before{
-  content:"";
-  flex:none;
-  align-self:flex-start;
-  width:9px;
-  height:1.62em;
-  height:1lh;
-  background:linear-gradient(var(--accent),var(--accent)) 0 50%/9px 1px no-repeat;
-}
+.contact-lede{margin:0;max-width:52ch;}
 
-.contact-links{display:flex;flex-wrap:wrap;gap:10px;margin:28px 0 0;}
+.contact-links{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 0;}
 .contact-links a{
   font-family:"Azeret Mono",ui-monospace,monospace;
   font-size:12px;
@@ -385,7 +358,6 @@ footer p{
   .rec-prose{border-right:0;border-bottom:1px solid var(--rule-soft);}
   .matrix div{grid-template-columns:1fr;gap:4px;}
   .fields div{grid-template-columns:110px minmax(0,1fr);}
-  .avail-grid{grid-template-columns:1fr;gap:26px;}
 }
 
 @media (max-width:600px){
@@ -431,14 +403,13 @@ footer p{
     <h1>Eduardo Gamboa</h1>
     <p class="lede">Fisioterapeuta en activo y desarrollador web.</p>
     <p class="lede">Construyo software clínico y lo pruebo con mis pacientes.</p>
-    <p class="intro">Casi diez años de consulta en fisioterapia musculoesquelética y tres de docencia universitaria. Desde 2024 desarrollo las herramientas que echaba en falta trabajando.</p>
+    <p class="intro">Casi diez años de consulta en fisioterapia musculoesquelética y cuatro de docencia universitaria. Desde 2024 desarrollo las herramientas que echaba en falta trabajando.</p>
   </div>
 
   <dl class="fields">
     <div><dt>Consulta</dt><dd>Fisioterapia musculoesquelética</dd></div>
     <div><dt>Desarrollo</dt><dd>Software clínico, desde 2024</dd></div>
     <div><dt>Base</dt><dd>Madrid</dd></div>
-    <div><dt>Encargos</dt><dd>Abierto</dd></div>
   </dl>
 </div></div>
 
@@ -541,7 +512,7 @@ footer p{
       <tr><td>2025 — actualidad</td><td>Fisioterapeuta</td><td>Clínica Universitaria La Salle, Madrid</td></tr>
       <tr><td>2024 — actualidad</td><td>Desarrollo de software clínico</td><td>Proyecto propio</td></tr>
       <tr><td>2024</td><td>Junior Full Stack Developer</td><td>OXYGEN Workspace</td></tr>
-      <tr><td>2016 — 2019</td><td>Profesor, Grado en Fisioterapia</td><td>CSEU La Salle — Universidad Autónoma de Madrid</td></tr>
+      <tr><td>2016 — 2020</td><td>Profesor, Grado en Fisioterapia</td><td>CSEU La Salle — Universidad Autónoma de Madrid</td></tr>
       <tr><td>2015 — 2024</td><td>Fisioterapeuta</td><td>Clínica Universitaria La Salle, Madrid</td></tr>
     </tbody>
   </table>
@@ -559,22 +530,8 @@ footer p{
 </div></section>
 
 <section class="contact"><div class="wrap">
-  <h2 class="sec-head">Disponibilidad</h2>
-  <div class="avail-grid">
-    <div>
-      <p>Me interesan los proyectos de salud digital, software clínico y valoración funcional. Acepto encargos como freelance, compaginados con la consulta.</p>
-      <ul class="avail">
-        <li>Herramientas de valoración y registro para clínicas y centros de fisioterapia</li>
-        <li>Integración de sensores y dispositivos —Bluetooth, acelerometría— en aplicaciones web</li>
-        <li>Desarrollo web general</li>
-      </ul>
-    </div>
-    <dl class="fields">
-      <div><dt>Base</dt><dd>Madrid</dd></div>
-      <div><dt>Modalidad</dt><dd>Remoto o presencial</dd></div>
-      <div><dt>Idiomas</dt><dd>Español</dd></div>
-    </dl>
-  </div>
+  <h2 class="sec-head">Hablemos</h2>
+  <p class="contact-lede">Me interesan los proyectos de salud digital, software clínico y valoración funcional.</p>
   <p class="contact-links">
     <a href="mailto:edu.gamboa.rodriguez@gmail.com">edu.gamboa.rodriguez@gmail.com</a>
     <a href="https://github.com/physiodevapp">GitHub</a>
